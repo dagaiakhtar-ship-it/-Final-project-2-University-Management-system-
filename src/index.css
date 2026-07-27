@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@media print {
+  /* Hide standard non-printable dashboard elements */
+  nav,
+  aside,
+  header,
+  footer,
+  button,
+  .no-print,
+  [role="navigation"],
+  [role="banner"] {
+    display: none !important;
+  }
+
+  /* Reset outer layouts and enable full page utilization */
+  body, 
+  #root, 
+  #erp-dashboard-layout,
+  main,
+  .flex-grow {
+    display: block !important;
+    background: white !important;
+    color: black !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  /* Make sure the transcript container expands beautifully and avoids clipping */
+  #printable-transcript-area {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Page breaks optimization for transcript list */
+  .border-collapse {
+    page-break-inside: avoid;
+  }
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+}

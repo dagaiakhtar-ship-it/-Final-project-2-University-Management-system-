@@ -1,0 +1,569 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Represents a system user with login credentials and base profile information",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique identifier (UUID or Firebase UID)" },
+        "email": { "type": "string", "format": "email" },
+        "username": { "type": "string" },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "avatarUrl": { "type": "string", "format": "uri" },
+        "gender": { "type": "string", "enum": ["MALE", "FEMALE", "OTHER"] },
+        "roleId": { "type": "string", "description": "Reference to the associated Role ID" },
+        "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE", "SUSPENDED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "deletedAt": { "type": "string", "format": "date-time" },
+        "createdBy": { "type": "string" },
+        "updatedBy": { "type": "string" }
+      },
+      "required": ["id", "email", "firstName", "lastName", "roleId", "gender", "status", "createdAt", "updatedAt"]
+    },
+    "Role": {
+      "title": "Role",
+      "description": "Defines access control groups and system responsibilities",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "enum": ["SUPER_ADMIN", "ADMIN", "TEACHER", "STUDENT", "PARENT"] },
+        "description": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" },
+        "deletedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "status", "createdAt", "updatedAt"]
+    },
+    "Permission": {
+      "title": "Permission",
+      "description": "Represents individual granular action permissions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "status", "createdAt", "updatedAt"]
+    },
+    "University": {
+      "title": "University",
+      "description": "Root tenant organization",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "address": { "type": "string" },
+        "contactEmail": { "type": "string", "format": "email" },
+        "contactPhone": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "code", "status", "createdAt", "updatedAt"]
+    },
+    "Department": {
+      "title": "Department",
+      "description": "Academic divisions within the University",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "universityId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "code", "universityId", "status", "createdAt", "updatedAt"]
+    },
+    "Program": {
+      "title": "Program",
+      "description": "Degree streams (e.g., BSc Computer Science) offered by a Department",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "departmentId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "code", "departmentId", "status", "createdAt", "updatedAt"]
+    },
+    "Semester": {
+      "title": "Semester",
+      "description": "Academic periods within a program",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "programId": { "type": "string" },
+        "academicYearId": { "type": "string" },
+        "status": { "type": "string", "enum": ["UPCOMING", "ACTIVE", "COMPLETED", "SUSPENDED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "code", "programId", "academicYearId", "status", "createdAt", "updatedAt"]
+    },
+    "Section": {
+      "title": "Section",
+      "description": "Class divisions within a Semester (e.g., Section A, Section B)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "semesterId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "semesterId", "status", "createdAt", "updatedAt"]
+    },
+    "Course": {
+      "title": "Course",
+      "description": "Curriculum units defining subjects",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "description": { "type": "string" },
+        "credits": { "type": "integer" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "code", "credits", "status", "createdAt", "updatedAt"]
+    },
+    "Subject": {
+      "title": "Subject",
+      "description": "Specific instance of a Course mapped to a Semester and taught by a Teacher",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "code": { "type": "string" },
+        "courseId": { "type": "string" },
+        "semesterId": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "code", "courseId", "semesterId", "status", "createdAt", "updatedAt"]
+    },
+    "AcademicYear": {
+      "title": "AcademicYear",
+      "description": "Represents full academic cycles (e.g., 2026-2027)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "startDate": { "type": "string", "format": "date-time" },
+        "endDate": { "type": "string", "format": "date-time" },
+        "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE", "SUSPENDED", "GRADUATED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "startDate", "endDate", "status", "createdAt", "updatedAt"]
+    },
+    "Student": {
+      "title": "Student",
+      "description": "Academic records of enrolled students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "rollNumber": { "type": "string" },
+        "userId": { "type": "string" },
+        "programId": { "type": "string" },
+        "sectionId": { "type": "string" },
+        "academicYearId": { "type": "string" },
+        "parentId": { "type": "string" },
+        "status": { "type": "string", "enum": ["ACTIVE", "INACTIVE", "SUSPENDED", "GRADUATED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "rollNumber", "userId", "programId", "academicYearId", "status", "createdAt", "updatedAt"]
+    },
+    "Teacher": {
+      "title": "Teacher",
+      "description": "Records of faculty/teaching members",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "designation": { "type": "string" },
+        "userId": { "type": "string" },
+        "departmentId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "employeeId", "userId", "departmentId", "status", "createdAt", "updatedAt"]
+    },
+    "Parent": {
+      "title": "Parent",
+      "description": "Records of parent/guardian profiles associated with students",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "occupation": { "type": "string" },
+        "relation": { "type": "string" },
+        "userId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "relation", "userId", "status", "createdAt", "updatedAt"]
+    },
+    "Admin": {
+      "title": "Admin",
+      "description": "Administrative profile extensions for operations users",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "department": { "type": "string" },
+        "userId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "userId", "status", "createdAt", "updatedAt"]
+    },
+    "AttendanceSession": {
+      "title": "AttendanceSession",
+      "description": "Class session instances for recording attendance",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "teacherId": { "type": "string" },
+        "sectionId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "date", "teacherId", "sectionId", "status", "createdAt", "updatedAt"]
+    },
+    "Attendance": {
+      "title": "Attendance",
+      "description": "Individual student attendance marking inside a session",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "sessionId": { "type": "string" },
+        "status": { "type": "string", "enum": ["PRESENT", "ABSENT", "LATE", "EXCUSED"] },
+        "remarks": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "studentId", "sessionId", "status", "createdAt", "updatedAt"]
+    },
+    "Result": {
+      "title": "Result",
+      "description": "Student subject final evaluation scores",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "studentId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "gpa": { "type": "number" },
+        "grade": { "type": "string" },
+        "status": { "type": "string", "enum": ["PASSED", "FAILED", "PENDING"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "studentId", "subjectId", "status", "createdAt", "updatedAt"]
+    },
+    "ResultDetail": {
+      "title": "ResultDetail",
+      "description": "Individual result grade components (e.g., Midterms, Finals, Practicals)",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "resultId": { "type": "string" },
+        "componentName": { "type": "string" },
+        "obtainedMarks": { "type": "number" },
+        "totalMarks": { "type": "number" },
+        "weightage": { "type": "number" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "resultId", "componentName", "obtainedMarks", "totalMarks", "status", "createdAt", "updatedAt"]
+    },
+    "Assignment": {
+      "title": "Assignment",
+      "description": "Academic coursework assigned to sections/subjects",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "dueDate": { "type": "string", "format": "date-time" },
+        "maxMarks": { "type": "number" },
+        "subjectId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "dueDate", "maxMarks", "subjectId", "status", "createdAt", "updatedAt"]
+    },
+    "Submission": {
+      "title": "Submission",
+      "description": "Student work completed and graded for Assignments",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "submissionDate": { "type": "string", "format": "date-time" },
+        "contentUrl": { "type": "string", "format": "uri" },
+        "obtainedMarks": { "type": "number" },
+        "feedback": { "type": "string" },
+        "studentId": { "type": "string" },
+        "assignmentId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "submissionDate", "studentId", "assignmentId", "status", "createdAt", "updatedAt"]
+    },
+    "Fee": {
+      "title": "Fee",
+      "description": "Student financial charge schedules",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "amount": { "type": "number" },
+        "dueDate": { "type": "string", "format": "date-time" },
+        "academicYearId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "amount", "dueDate", "academicYearId", "status", "createdAt", "updatedAt"]
+    },
+    "FeePayment": {
+      "title": "FeePayment",
+      "description": "Financial transaction entries of fees paid",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "amountPaid": { "type": "number" },
+        "paymentDate": { "type": "string", "format": "date-time" },
+        "transactionReference": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "studentId": { "type": "string" },
+        "feeId": { "type": "string" },
+        "status": { "type": "string", "enum": ["PENDING", "PAID", "PARTIAL", "FAILED", "REFUNDED"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "amountPaid", "paymentDate", "studentId", "feeId", "status", "createdAt", "updatedAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "System broadcast messages and custom notices",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "type": { "type": "string", "enum": ["SYSTEM", "ACADEMIC", "FEE", "ATTENDANCE", "ASSIGNMENT", "ANNOUNCEMENT"] },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "content", "type", "status", "createdAt", "updatedAt"]
+    },
+    "NotificationRecipient": {
+      "title": "NotificationRecipient",
+      "description": "Pivot mapping for notification deliveries and read trackings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "isRead": { "type": "boolean" },
+        "readAt": { "type": "string", "format": "date-time" },
+        "notificationId": { "type": "string" },
+        "userId": { "type": "string" }
+      },
+      "required": ["id", "isRead", "notificationId", "userId"]
+    },
+    "Announcement": {
+      "title": "Announcement",
+      "description": "High-level campus and university public notices",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "content": { "type": "string" },
+        "universityId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "content", "universityId", "status", "createdAt", "updatedAt"]
+    },
+    "Timetable": {
+      "title": "Timetable",
+      "description": "Section session schedules",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "dayOfWeek": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "sectionId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "roomId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "dayOfWeek", "startTime", "endTime", "sectionId", "subjectId", "status", "createdAt", "updatedAt"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "Physical lecture halls or labs within a Department",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "capacity": { "type": "integer" },
+        "departmentId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "capacity", "status", "createdAt", "updatedAt"]
+    },
+    "Exam": {
+      "title": "Exam",
+      "description": "Formal test records scheduled for courses and sections",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "maxMarks": { "type": "number" },
+        "semesterId": { "type": "string" },
+        "subjectId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "maxMarks", "semesterId", "subjectId", "status", "createdAt", "updatedAt"]
+    },
+    "ExamSchedule": {
+      "title": "ExamSchedule",
+      "description": "Specific timings and locations mapped for exams",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "examId": { "type": "string" },
+        "roomId": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "date", "startTime", "endTime", "examId", "roomId", "status", "createdAt", "updatedAt"]
+    },
+    "LeaveRequest": {
+      "title": "LeaveRequest",
+      "description": "Leave submissions by Students and Teachers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "startDate": { "type": "string", "format": "date-time" },
+        "endDate": { "type": "string", "format": "date-time" },
+        "reason": { "type": "string" },
+        "status": { "type": "string", "enum": ["PENDING", "APPROVED", "REJECTED", "CANCELLED"] },
+        "approvedBy": { "type": "string" },
+        "studentId": { "type": "string" },
+        "teacherId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "startDate", "endDate", "reason", "status", "createdAt", "updatedAt"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "Secured system activity and records modification histories",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "action": { "type": "string" },
+        "tableName": { "type": "string" },
+        "recordId": { "type": "string" },
+        "oldValue": { "type": "string" },
+        "newValue": { "type": "string" },
+        "ipAddress": { "type": "string" },
+        "userId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "action", "tableName", "createdAt"]
+    },
+    "SystemSetting": {
+      "title": "SystemSetting",
+      "description": "Application behavior key-values",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "key": { "type": "string" },
+        "value": { "type": "string" },
+        "description": { "type": "string" },
+        "universityId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "key", "value", "createdAt", "updatedAt"]
+    }
+  },
+  "firestore": {
+    "universities": { "schema": "University", "description": "University tenants list" },
+    "roles": { "schema": "Role", "description": "Access roles" },
+    "permissions": { "schema": "Permission", "description": "Fine-grained system permissions" },
+    "users": { "schema": "User", "description": "System accounts and profiles" },
+    "departments": { "schema": "Department", "description": "Academic departments list" },
+    "programs": { "schema": "Program", "description": "Academic degree programs list" },
+    "semesters": { "schema": "Semester", "description": "Study terms and semesters list" },
+    "sections": { "schema": "Section", "description": "Semester divisions list" },
+    "courses": { "schema": "Course", "description": "Degree curriculums and courses list" },
+    "subjects": { "schema": "Subject", "description": "Individual subject entities" },
+    "academicYears": { "schema": "AcademicYear", "description": "Enclosing educational cycle years" },
+    "students": { "schema": "Student", "description": "Student profiles and status mappings" },
+    "teachers": { "schema": "Teacher", "description": "Faculty profiles" },
+    "parents": { "schema": "Parent", "description": "Parents and guardians mappings list" },
+    "admins": { "schema": "Admin", "description": "System operational administrators list" },
+    "attendanceSessions": { "schema": "AttendanceSession", "description": "Class attendance registries sessions list" },
+    "attendances": { "schema": "Attendance", "description": "Individual students checked in class attendances list" },
+    "results": { "schema": "Result", "description": "Subject grades cards list" },
+    "resultDetails": { "schema": "ResultDetail", "description": "Granular scores per result assessment component" },
+    "assignments": { "schema": "Assignment", "description": "Subject syllabus homework assignments list" },
+    "submissions": { "schema": "Submission", "description": "Assigned classwork uploads list" },
+    "fees": { "schema": "Fee", "description": "Tuitions schedules and fee dues list" },
+    "feePayments": { "schema": "FeePayment", "description": "Receipts of fee payments processed" },
+    "notifications": { "schema": "Notification", "description": "Notices records log" },
+    "notificationRecipients": { "schema": "NotificationRecipient", "description": "Notifications user deliveries statuses" },
+    "announcements": { "schema": "Announcement", "description": "University general announcements list" },
+    "timetables": { "schema": "Timetable", "description": "Lectures time blocks layouts" },
+    "rooms": { "schema": "Room", "description": "Infrastructure classrooms map" },
+    "exams": { "schema": "Exam", "description": "Term tests setups" },
+    "examSchedules": { "schema": "ExamSchedule", "description": "Room mappings of scheduled exams list" },
+    "leaveRequests": { "schema": "LeaveRequest", "description": "Teachers and students request of leaves list" },
+    "auditLogs": { "schema": "AuditLog", "description": "Operational change security entries" },
+    "systemSettings": { "schema": "SystemSetting", "description": "Root options key-values config" }
+  }
+}

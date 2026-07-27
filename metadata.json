@@ -1,0 +1,6 @@
+{
+  "name": "Smart University ERP",
+  "description": "Smart University ERP & Attendance Management System with multiple user roles, real-time tracking, and comprehensive academic management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

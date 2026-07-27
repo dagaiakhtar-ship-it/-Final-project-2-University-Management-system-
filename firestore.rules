@@ -1,0 +1,230 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ==========================================
+    // UTILITY/COMMON FUNCTIONS
+    // ==========================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function hasRole(roleName) {
+      return isAuthenticated() && 
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        getUserData().roleId == roleName;
+    }
+
+    function isAdmin() {
+      return hasRole('SUPER_ADMIN') || hasRole('ADMIN');
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 64 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    // ==========================================
+    // ENTITY VALIDATORS (Anti-Update-Gap)
+    // ==========================================
+
+    function isValidUser(data) {
+      return data.keys().hasAll(['id', 'email', 'firstName', 'lastName', 'roleId', 'gender', 'status', 'createdAt', 'updatedAt'])
+        && data.id is string
+        && data.email is string
+        && data.firstName is string
+        && data.lastName is string
+        && data.roleId is string
+        && data.gender in ['MALE', 'FEMALE', 'OTHER']
+        && data.status in ['ACTIVE', 'INACTIVE', 'SUSPENDED']
+        && data.createdAt is string
+        && data.updatedAt is string;
+    }
+
+    function isValidRole(data) {
+      return data.keys().hasAll(['id', 'name', 'status', 'createdAt', 'updatedAt'])
+        && data.id is string
+        && data.name in ['SUPER_ADMIN', 'ADMIN', 'TEACHER', 'STUDENT', 'PARENT']
+        && data.status is string;
+    }
+
+    // ==========================================
+    // RULES BY PATH / COLLECTION
+    // ==========================================
+
+    match /users/{userId} {
+      allow read: if isAuthenticated() && (isOwner(userId) || isAdmin());
+      allow create: if isAuthenticated() && (isAdmin() || request.auth.uid == userId) && isValidUser(request.resource.data);
+      allow update: if isAuthenticated() && (isOwner(userId) || isAdmin()) && isValidUser(request.resource.data);
+      allow delete: if isAdmin();
+    }
+
+    match /roles/{roleId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /permissions/{permissionId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /universities/{universityId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /departments/{departmentId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /programs/{programId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /semesters/{semesterId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /sections/{sectionId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /courses/{courseId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /subjects/{subjectId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /academicYears/{yearId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /students/{studentId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /teachers/{teacherId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /parents/{parentId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /admins/{adminId} {
+      allow read: if isAdmin();
+      allow write: if isAdmin();
+    }
+
+    match /attendanceSessions/{sessionId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || hasRole('TEACHER');
+    }
+
+    match /attendances/{attendanceId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || hasRole('TEACHER');
+    }
+
+    match /results/{resultId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || hasRole('TEACHER');
+    }
+
+    match /resultDetails/{detailId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || hasRole('TEACHER');
+    }
+
+    match /assignments/{assignmentId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin() || hasRole('TEACHER');
+    }
+
+    match /submissions/{submissionId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    match /fees/{feeId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /feePayments/{paymentId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /notifications/{notificationId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /notificationRecipients/{recipientId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    match /announcements/{announcementId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /timetables/{timetableId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /rooms/{roomId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /exams/{examId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /examSchedules/{scheduleId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+
+    match /leaveRequests/{requestId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    match /auditLogs/{logId} {
+      allow read: if isAdmin();
+      allow write: if isAuthenticated();
+    }
+
+    match /systemSettings/{settingId} {
+      allow read: if isAuthenticated();
+      allow write: if isAdmin();
+    }
+  }
+}
