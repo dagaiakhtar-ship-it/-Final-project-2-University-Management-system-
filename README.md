@@ -49,7 +49,7 @@ A modern, full‑stack university ERP built with **React 19 · TypeScript · Exp
 
 > [!IMPORTANT]
 > ### 🔗 Live Application
->https://final-project-2-university-manageme.vercel.app/
+>https://final-project-2-university-manageme-roan.vercel.app/
 >
 > 🔑 **Default login (seeded) →** Username `admin` · Password `admin123` *(Super Admin — change immediately)*
 
