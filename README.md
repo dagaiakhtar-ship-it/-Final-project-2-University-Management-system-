@@ -208,7 +208,25 @@ It follows a **Layered Modular Monolith Architecture** for maintainability, scal
 </td>
 <td align="center" width="50%">
 <img src="https://placehold.co/760x440/0F172A/38BDF8?text=2+·+Student+Management&font=roboto" width="100%" alt="Students"/>
-<br/><sub><b>② Student Management</b> — profiles, enrollment & records</sub>
+     <br>
+     <img width="960" height="540" alt="Te1" src="https://github.com/user-attachments/assets/64e6d8b4-6dca-4f13-a470-c2b601463758" />
+<br>
+     <img width="960" height="540" alt="te2" src="https://github.com/user-attachments/assets/6a03d382-867e-4c53-bcab-e7ad75b48958" />
+<br>
+     <img width="960" height="540" alt="te3" src="https://github.com/user-attachments/assets/3c7c8846-626f-4b17-99ea-a06bf4d3db65" />
+<br>
+     <img width="960" height="540" alt="te4" src="https://github.com/user-attachments/assets/a2bc219c-1c09-447e-8675-c05ce5fe31e5" />
+     <br>
+<img width="960" height="540" alt="te5" src="https://github.com/user-attachments/assets/fed77b76-84a1-48ef-950d-e3fbaf1336f1" />
+<br>
+<img width="960" height="540" alt="te6" src="https://github.com/user-attachments/assets/fba6c364-1934-49a1-ae4c-fa6077a80a79" />
+<br>
+<img width="960" height="540" alt="te7" src="https://github.com/user-attachments/assets/9404ce6d-8822-4929-a455-5918766e35f7" />
+<br>
+<img width="960" height="540" alt="te8" src="https://github.com/user-attachments/assets/46dd52f6-e11b-45b7-a6d1-826368d1386d" />
+<br>
+
+<br/><sub><b>② Teachers Management</b> — profiles, enrollment & records</sub>
 </td>
 </tr>
 <tr>
