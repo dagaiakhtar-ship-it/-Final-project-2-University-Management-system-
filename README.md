@@ -49,6 +49,7 @@ A modern, full‑stack university ERP built with **React 19 · TypeScript · Exp
 
 > [!IMPORTANT]
 > ### 🔗 Live Application
+> https://agent-6a67e13366dec--smart-university-management-setting.netlify.app/login
 >  vercal app make problem demo data removed <br>
 >https://final-project-2-university-manageme-roan.vercel.app/  <br>
 >google ai studio>>https://ai.studio/apps/5c1f8d4c-a9ba-406b-aa25-0dea058a2dfc
