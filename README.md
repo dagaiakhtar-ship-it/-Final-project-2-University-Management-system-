@@ -144,6 +144,66 @@ It follows a **Layered Modular Monolith Architecture** for maintainability, scal
 <tr>
 <td align="center" width="50%">
 <img src="https://placehold.co/760x440/0F172A/8B5CF6?text=1+·+Admin+Dashboard+%26+KPIs&font=roboto" width="100%" alt="Dashboard"/>
+     <br>
+<img width="960" height="540" alt="s1" src="https://github.com/user-attachments/assets/0c9ac1df-4402-4d79-9c02-dd907d49f94d" />
+<br>
+<img width="960" height="540" alt="sc2" src="https://github.com/user-attachments/assets/d4f4d39a-cf31-4d3b-9595-8c607dfa9a06" />
+<br>
+<img width="960" height="540" alt="sc3" src="https://github.com/user-attachments/assets/e4e131ad-d91b-4ac4-8a88-605f6a69d408" />
+<br>
+<img width="960" height="540" alt="sc4" src="https://github.com/user-attachments/assets/95d6a19d-3431-456f-ae33-f0d5a8e158fa" />
+<br>
+<img width="960" height="540" alt="sc4" src="https://github.com/user-attachments/assets/d2975eb5-565b-4107-b379-859955f6f432" />
+<br>
+<img width="960" height="540" alt="sc5" src="https://github.com/user-attachments/assets/29131045-c216-444e-9bc8-b69afcc3cf23" />
+<br>
+<img width="960" height="540" alt="sc6" src="https://github.com/user-attachments/assets/e8c29140-08ae-4103-aaf7-cfce33cf7eb3" />
+<br>
+<img width="960" height="540" alt="sc7" src="https://github.com/user-attachments/assets/02c7bef0-541f-42d3-80e4-d6b9dbc8433f" />
+<br>
+<img width="960" height="540" alt="sc8" src="https://github.com/user-attachments/assets/05e6d2c2-3c56-46b4-987c-64ef0aa69cdd" />
+<br>
+<img width="960" height="540" alt="sc9" src="https://github.com/user-attachments/assets/55c16eaa-fb4e-4e21-b769-ac98fd8235fb" />
+<br>
+<img width="960" height="540" alt="sc10" src="https://github.com/user-attachments/assets/5a61a388-8d05-47c0-bdb0-cbc822e80e85" />
+<br>
+<img width="960" height="540" alt="sc11" src="https://github.com/user-attachments/assets/43007389-bb6f-4fd6-aa94-c1a3bbf9b1bb" />
+<br>
+<img width="960" height="540" alt="sc12" src="https://github.com/user-attachments/assets/82760f92-4da5-4072-9a5a-8e8d54b64f7a" />
+<br>
+<img width="960" height="540" alt="sc13" src="https://github.com/user-attachments/assets/2f80057d-7097-4384-bd12-a0da95fbf219" />
+
+<br>
+<img width="960" height="540" alt="sc14" src="https://github.com/user-attachments/assets/9a8b9f05-a53e-4231-9410-fa9132ec3ea9" />
+<br>
+<img width="960" height="540" alt="sc15" src="https://github.com/user-attachments/assets/65c5b3c4-364f-4bff-b4c1-2cd0f5fc7a9b" />
+<br>
+<img width="960" height="540" alt="sc16" src="https://github.com/user-attachments/assets/a87b2e98-18e7-4a80-ba24-88930297884e" />
+<br>
+
+<img width="960" height="540" alt="sc17" src="https://github.com/user-attachments/assets/84c5be51-0517-482e-8911-c926f4a297e6" />
+<br>
+<img width="960" height="540" alt="sc18" src="https://github.com/user-attachments/assets/b65004a9-f2c3-400f-a339-f94e5d0b899d" />
+<br>
+<img width="960" height="540" alt="sc19" src="https://github.com/user-attachments/assets/026e5962-abe6-4def-a255-88ebb70ad447" />
+<br>
+<img width="960" height="540" alt="sc20" src="https://github.com/user-attachments/assets/6dd53bb6-51ed-4c56-a2ee-f3521db87797" />
+<br>
+<img width="960" height="540" alt="sc21" src="https://github.com/user-attachments/assets/5d58953a-ce8c-448a-849e-26f7c7a39c34" />
+<br>
+<img width="960" height="540" alt="sc22" src="https://github.com/user-attachments/assets/afd4dd13-7eaa-41e9-96ea-cb9d715a1366" />
+<br>
+<img width="960" height="540" alt="sc23" src="https://github.com/user-attachments/assets/31dd6e3b-5923-47e0-aee3-791b5109b8b7" />
+<br>
+<img width="960" height="540" alt="sc24" src="https://github.com/user-attachments/assets/acf957f4-445b-48cc-88f2-3b317de78d69" />
+<br>
+<img width="960" height="540" alt="sc25" src="https://github.com/user-attachments/assets/dedae174-3b69-4a3a-86bf-f49cc30a975e" />
+<br>
+<img width="960" height="540" alt="sc26" src="https://github.com/user-attachments/assets/89a533f0-b783-4a52-8024-bf4960c25555" />
+<br>
+<img width="960" height="540" alt="sc27" src="https://github.com/user-attachments/assets/a2d32210-2bfe-49a4-96e1-2ec955570bb9" />
+<br>
+
 <br/><sub><b>① Admin Dashboard</b> — KPIs, charts & real‑time metrics</sub>
 </td>
 <td align="center" width="50%">
