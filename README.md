@@ -239,6 +239,23 @@ It follows a **Layered Modular Monolith Architecture** for maintainability, scal
 <tr>
 <td align="center">
 <img src="https://placehold.co/760x440/0F172A/22C55E?text=3+·+Academics+%26+Timetable&font=roboto" width="100%" alt="Academics"/>
+ <br>
+  <img width="960" height="540" alt="st1" src="https://github.com/user-attachments/assets/6243fe18-20b9-43a2-8acb-efdc0c55a7e4" />
+<br>
+     <img width="960" height="540" alt="st2" src="https://github.com/user-attachments/assets/405dd704-7706-4c5d-99b2-2f72b7b54270" />
+<br>
+     <img width="960" height="540" alt="st3" src="https://github.com/user-attachments/assets/9a98fcb8-effe-483f-a5ff-44032178a508" />
+<br>
+     <img width="960" height="540" alt="st4" src="https://github.com/user-attachments/assets/de9df19c-e587-4f29-96ef-923dc9e4b92c" />
+<br>
+     <img width="960" height="540" alt="st5" src="https://github.com/user-attachments/assets/fd539e2d-9f52-4b61-8229-c03fd080faf8" />
+<br>
+     <img width="960" height="540" alt="st6" src="https://github.com/user-attachments/assets/81447486-32e6-4a34-96b3-d8d2907ba7e5" />
+<br>
+     <img width="960" height="540" alt="st7" src="https://github.com/user-attachments/assets/c29720df-92af-4971-aa89-5a24968d015f" />
+<br>
+     <img width="960" height="540" alt="st8" src="https://github.com/user-attachments/assets/fa946ccc-e0b5-4eba-9d19-c30a9c48d89a" />
+<br>
 <br/><sub><b>③ Academics</b> — courses, timetable & attendance</sub>
 </td>
 <td align="center">
