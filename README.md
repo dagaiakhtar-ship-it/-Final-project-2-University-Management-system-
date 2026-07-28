@@ -225,6 +225,13 @@ It follows a **Layered Modular Monolith Architecture** for maintainability, scal
 <br>
 <img width="960" height="540" alt="te8" src="https://github.com/user-attachments/assets/46dd52f6-e11b-45b7-a6d1-826368d1386d" />
 <br>
+<img width="960" height="540" alt="te11" src="https://github.com/user-attachments/assets/4ef5a8a9-19a3-4b2a-b2d6-3cfcc139f28d" />
+<br>
+     <img width="960" height="540" alt="te22" src="https://github.com/user-attachments/assets/c5b5434f-e8aa-41f3-9ffe-3cacb365846d" />
+<br>
+     <img width="960" height="540" alt="te33" src="https://github.com/user-attachments/assets/e7058acd-aa29-4b67-8289-861f86b7b2b4" />
+<br>
+     <img width="960" height="540" alt="44" src="https://github.com/user-attachments/assets/3ff2a48c-9a3b-4835-821f-a6007623d76a" />
 
 <br/><sub><b>② Teachers Management</b> — profiles, enrollment & records</sub>
 </td>
